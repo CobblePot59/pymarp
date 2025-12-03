@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="static/css/preview.css">
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+
+<div class="container">
+    <div class="header" id="header">
+        <div class="header-left">
+            <button class="toggle-sidebar-header" id="toggleSidebarHeader" title="Toggle sidebar">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+            <h1>Preview</h1>
+        </div>
+        <div class="header-actions">
+            <button class="btn" id="fullscreenBtn">
+                <span>⛶</span>
+                <span>Fullscreen</span>
+            </button>
+            <a href="/" class="back-link" title="Back to home">
+                <span>↩</span>
+            </a>
+        </div>
+        <input type="file" id="fileInput" accept=".md,.zip" />
+    </div>
+
+    <div class="main" id="mainContainer">
+        <!-- Sidebar with slide list -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Slides</h3>
+                <button class="toggle-sidebar-btn" id="closeSidebarBtn" title="Close sidebar">✕</button>
+            </div>
+            <ul class="slide-list" id="slideList"></ul>
+        </div>
+
+        <div class="slides-container" id="slidesContainer"></div>
+    </div>
+
+    <div class="controls" id="controls">
+        <button class="nav-btn" id="prevBtn">
+            <span>←</span>
+            <span>Previous</span>
+        </button>
+        <span class="slide-counter">
+            <span><span id="currentSlide">1</span> / <span id="totalSlides">1</span></span>
+        </span>
+        <button class="nav-btn" id="nextBtn">
+            <span>Next</span>
+            <span>→</span>
+        </button>
+    </div>
+
+    <div class="notification" id="notification"></div>
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="static/js/preview.js"></script>
+{% endblock %}

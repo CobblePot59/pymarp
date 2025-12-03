@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="static/css/edit.css">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="header">
+        <h1>Edit Markdown</h1>
+        <div class="header-actions">
+            <button class="btn btn-secondary" id="uploadBtn">📁 Load File</button>
+            <button class="btn btn-secondary" id="downloadBtn">⬇️ Download</button>
+            <a href="/" class="back-link">↩</a>
+        </div>
+        <input type="file" id="fileInput" accept=".md,.zip" />
+    </div>
+
+    <div class="main">
+        <div class="editor-panel">
+            <div class="editor-header">Markdown</div>
+            <textarea id="markdownInput"></textarea>
+        </div>
+
+        <div class="preview-panel">
+            <div class="preview-header">
+                <span>Live Preview</span>
+                <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">1</span></span>
+            </div>
+            <div class="preview-content" id="previewContent"></div>
+            <div class="slide-nav">
+                <button class="nav-btn" id="prevBtn">← Previous</button>
+                <button class="nav-btn" id="nextBtn">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="static/js/edit.js"></script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="static/css/index.css">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Markdown Tools</h1>
+    <p class="subtitle">Manage your Markdown files</p>
+
+    <div class="menu">
+        <a href="/convert" class="menu-item">
+            <div><span class="icon">📄</span><span class="title">Convert PPTX</span></div>
+            <div class="desc">Convert your presentations to Markdown</div>
+        </a>
+
+        <a href="/edit" class="menu-item">
+            <div><span class="icon">✏️</span><span class="title">Edit</span></div>
+            <div class="desc">Edit and modify your Markdown files</div>
+        </a>
+
+        <a href="/preview" class="menu-item">
+            <div><span class="icon">👁️</span><span class="title">Preview</span></div>
+            <div class="desc">Preview your Markdown files</div>
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pymarp</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+    {% block body %}
+    <div class="container">
+        {% if show_header %}
+        <div class="header">
+            <h1>{% block header_title %}{% endblock %}</h1>
+            <a href="{{ back_url|default('/') }}" class="back-link">↩</a>
+        </div>
+        {% endif %}
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+    {% endblock %}
+
+    <script>
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+
+            if (type !== 'loading') {
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        }
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

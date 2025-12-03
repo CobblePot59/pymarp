@@ -1,0 +1,39 @@
+.upload-area {
+    border: 2px dashed #ccc;
+    border-radius: 6px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.upload-area:hover {
+    border-color: #999;
+    background: #fafafa;
+}
+
+.upload-area.dragover {
+    border-color: #333;
+    background: #f9f9f9;
+}
+
+.upload-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.upload-area h3 {
+    color: #333;
+    font-size: 15px;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.upload-area p {
+    color: #999;
+    font-size: 12px;
+}
+
+input[type="file"] {
+    display: none;
+}

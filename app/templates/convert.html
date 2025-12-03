@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% set show_header = true %}
+{% block header_title %}Convert PPTX{% endblock %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="static/css/convert.css">
+{% endblock %}
+
+{% block content %}
+<div class="upload-area" id="uploadArea">
+    <div class="upload-icon">📄</div>
+    <h3>Drop a PPTX file here</h3>
+    <p>or click to select</p>
+    <input type="file" id="fileInput" accept=".pptx" />
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="static/js/convert.js"></script>
+{% endblock %}
