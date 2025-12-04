@@ -131,11 +131,11 @@ function handleFullscreenChange() {
     
     if (isCurrentlyFullscreen) {
         isFullscreen = true;
-        fullscreenBtn.innerHTML = '<span>⛶</span><span>Exit Fullscreen</span>';
+        fullscreenBtn.innerHTML = '<span>\u26f6</span><span>Exit Fullscreen</span>';
         document.body.classList.add('fullscreen-mode');
     } else {
         isFullscreen = false;
-        fullscreenBtn.innerHTML = '<span>⛶</span><span>Fullscreen</span>';
+        fullscreenBtn.innerHTML = '<span>\u26f6</span><span>Fullscreen</span>';
         document.body.classList.remove('fullscreen-mode');
         document.body.classList.remove('hide-cursor');
         header.classList.remove('show');
@@ -258,14 +258,45 @@ function markdownToHtml(text) {
     html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
     html = html.replace(/_(.*?)_/g, '<em>$1</em>');
     
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-    
-    // CORRECTION: Regex correcte pour les images Markdown
-    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, alt, src) {
+    // Images first (before links, as they start with !)
+    // Syntax: ![alt text](path/to/image.png) or ![alt text](path/to/image.png){width=300px;center}
+    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)(\{[^}]*\})?/g, function(match, alt, src, attrs) {
         const filename = src.split('/').pop();
         const imageSrc = imagesData[filename] || src;
-        return '<img src="' + imageSrc + '" alt="' + alt + '">';
+        let style = '';
+        let isCenter = false;
+        
+        // Clean alt text
+        const cleanAlt = (alt || '').trim() || 'image';
+        
+        // Parse style attributes
+        if (attrs) {
+            const attrStr = attrs.slice(1, -1); // Remove curly braces
+            const parts = attrStr.split(';').filter(p => p.trim());
+            parts.forEach(part => {
+                part = part.trim();
+                if (part === 'center') {
+                    isCenter = true;
+                } else if (part.includes('=')) {
+                    const [key, value] = part.split('=').map(s => s.trim());
+                    if (key === 'width' || key === 'height') {
+                        style += `${key}: ${value}; `;
+                    }
+                }
+            });
+        }
+        
+        const styleAttr = style ? ` style="${style}"` : '';
+        const img = `<img src="${imageSrc}" alt="${cleanAlt}"${styleAttr}>`;
+        
+        // Wrapper with centered div if requested
+        if (isCenter) {
+            return `<div style="display: flex; justify-content: center; margin: 12px 0;"><div>${img}</div></div>`;
+        }
+        return img;
     });
+    
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
     
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
     
