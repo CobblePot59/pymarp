@@ -51,6 +51,8 @@ Create slides by separating them with `---`:
 # Slide 1 Title
 
 Welcome to your presentation
+![Palm](https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Deganiabet3.jpg/500px-Deganiabet3.jpg){width=400px;center}
+
 
 ---
 
